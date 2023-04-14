@@ -21,3 +21,23 @@ def solution(N, stages):
         results.append(heapq.heappop(q)[1])
     
     return results
+
+def solution(N, stages):
+    results = []
+    arrived = len(stages)
+
+    for level in range(1,N+1):
+        fail = 0
+        not_cleared = stages.count(level)
+        if arrived == 0:
+            fail = 0
+        else:
+            fail = not_cleared/arrived
+        results.append((fail,level))
+        arrived -= not_cleared
+
+    results.sort(key=lambda x:x[0],reverse=True)
+    answer = []
+    for result in results:
+        answer.append(result[1])
+    return answer
